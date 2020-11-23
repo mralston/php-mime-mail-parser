@@ -41,7 +41,7 @@ final class ParserTest extends TestCase
 
         //Test Nb Attachments (ignoring inline attachments)
         $attachments = $Parser->getNestedAttachments(['attachment']);
-        $this->assertEquals(count($attachmentsExpected), count($attachments));
+        $this->assertCount(count($attachmentsExpected), $attachments);
         $iterAttachments = 0;
 
         foreach ($attachmentsExpected as $attachmentExpected) {
@@ -76,8 +76,8 @@ final class ParserTest extends TestCase
         $Parser = Parser::fromText(file_get_contents($file));
 
         $inlineParts = $Parser->getMessageBodies(['text']);
-        $this->assertEquals(is_array($inlineParts), true);
-        $this->assertEquals(count($inlineParts), 2);
+        $this->assertIsArray($inlineParts);
+        $this->assertCount(2, $inlineParts);
         $this->assertEquals($inlineParts[0], "First we have a text block, then we insert an image:\r\n\r\n");
         $this->assertEquals($inlineParts[1], "\r\n\r\nThen we have more text\r\n\r\n-- sent from my phone.");
     }
